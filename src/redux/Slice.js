@@ -35,7 +35,10 @@ export const gamesByPlatformAsync = createAsyncThunk(
         if(response.ok){
             // const searched = response.json();
             // return searched;
-            return await response.json()
+            // return await response.json()
+            const listForSplice = await response.json();
+            const gamesByPlatform = [...listForSplice].splice(0, 20);
+            return {gamesByPlatform}
         }
     }
 )
@@ -45,6 +48,7 @@ export const gamesByPlatformAsync = createAsyncThunk(
 export const ftpGamesSlice = createSlice({
     name: "ftpGamesSlice",
     initialState: [],
+
     reducers:{
 
     },
@@ -53,7 +57,7 @@ export const ftpGamesSlice = createSlice({
             return action.payload.gamesList;
         })
         builder.addCase(gamesByPlatformAsync.fulfilled, (state, action)=>{
-            return action.payload;
+            return action.payload.gamesByPlatform;
         })
     }
 })

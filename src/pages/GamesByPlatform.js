@@ -7,7 +7,7 @@ import GamesList from "../components/GamesList";
 
 const GamesByPlatform = () => {
 
-    const [anchorEl, setAnchorEl] = useState(null);
+    const [anchorEl, setAnchorEl] = useState(false);
     const [platform, setPlatform] = useState('Select platform');
 
     const handleMenu = (event) => {
@@ -18,30 +18,31 @@ const GamesByPlatform = () => {
         setAnchorEl(null);
     };
 
-    // const handlePlatformMenu = (e) =>{
-    //     setPlatform(e.target.value)
-    // }
 
-    const handleClick = (e) =>{
+    const handlePlatformClick = (e) =>{
         const {myValue} = e.currentTarget.dataset;
         setPlatform(myValue);
+        
+        dispatch(gamesByPlatformAsync({platform: myValue}));
+
     }
 
-    const ftpGames = useSelector((state) => state.ftpGamesState)
 
     const dispatch = useDispatch();
 
-    useEffect(() =>{
-        dispatch(gamesByPlatformAsync({platform}))
-    }, [])
+
+
+    // useEffect(() =>{
+    //     dispatch(gamesByPlatformAsync())
+    // }, [])
 
     return (
         <div>
-            <IconButton onClick={handleMenu}>{platform}<KeyboardArrowDownIcon/></IconButton>
-            <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
-                <MenuItem data-my-value="PC" onClick={handleClick}>PC</MenuItem>
-                <MenuItem data-my-value="Browser" onClick={handleClick}>Browser</MenuItem>
-                <MenuItem data-my-value="All" onClick={handleClick}>All</MenuItem>
+            <IconButton onClick={handleMenu}>Select platform<KeyboardArrowDownIcon/></IconButton>
+            <Menu keepMounted anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
+                <MenuItem data-my-value="pc" onClick={handlePlatformClick}>PC</MenuItem>
+                <MenuItem data-my-value="browser" onClick={handlePlatformClick}>Browser</MenuItem>
+                <MenuItem data-my-value="all" onClick={handlePlatformClick}>All</MenuItem>
             </Menu>
             <GamesList/>
         </div>

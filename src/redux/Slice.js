@@ -6,7 +6,7 @@ const key = "9d2276bf14msh1d2a9c52bce377dp141e96jsn37ab4ea01f23"
 
 export const ftpGamesListAsync = createAsyncThunk(
     "getList/ftpGamesListAsync",
-    async () =>{
+    async () => {
         const response = await fetch("https://free-to-play-games-database.p.rapidapi.com/api/games", {
             "method": "GET",
             "headers": {
@@ -14,7 +14,7 @@ export const ftpGamesListAsync = createAsyncThunk(
                 "x-rapidapi-key": key
             }
         })
-        if(response.ok){
+        if (response.ok) {
             const listForSplice = await response.json();
             const gamesList = [...listForSplice].splice(0, 20);
             return {gamesList}
@@ -24,7 +24,7 @@ export const ftpGamesListAsync = createAsyncThunk(
 
 export const gamesByPlatformAsync = createAsyncThunk(
     'byPlatform/gamesByPlatformAsync',
-    async (payload) =>{
+    async (payload) => {
         const response = await fetch(`https://free-to-play-games-database.p.rapidapi.com/api/games?platform=${payload.platform}`, {
             "method": "GET",
             "headers": {
@@ -32,7 +32,7 @@ export const gamesByPlatformAsync = createAsyncThunk(
                 "x-rapidapi-key": key
             }
         })
-        if(response.ok){
+        if (response.ok) {
             // const searched = response.json();
             // return searched;
             // return await response.json()
@@ -43,21 +43,50 @@ export const gamesByPlatformAsync = createAsyncThunk(
     }
 )
 
+export const filterByTagAsync = createAsyncThunk(
+    'filter/filterByTagAsync',
+    async (payload) => {
+        const response = await fetch
+        (`https://free-to-play-games-database.p.rapidapi.com/api/filter?tag=${payload.genre}`, {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": host,
+                "x-rapidapi-key": key
+            }
+        })
+            // .then(response => {
+            //     console.log(response);
+            // })
+            // .catch(err => {
+            //     console.error(err);
+            // });
+        if(response.ok){
+            const listForSplice = await response.json();
+            const gameByGenre = [...listForSplice].splice(0, 20);
+            return {gameByGenre}
+        }
+    }
+
+)
 
 
 export const ftpGamesSlice = createSlice({
     name: "ftpGamesSlice",
     initialState: [],
 
-    reducers:{
-
-    },
-    extraReducers: (builder) =>{
-        builder.addCase(ftpGamesListAsync.fulfilled, (state, action) =>{
+    reducers: {},
+    extraReducers: (builder) => {
+        builder.addCase(ftpGamesListAsync.fulfilled, (state, action) => {
             return action.payload.gamesList;
         })
-        builder.addCase(gamesByPlatformAsync.fulfilled, (state, action)=>{
+        builder.addCase(gamesByPlatformAsync.fulfilled, (state, action) => {
             return action.payload.gamesByPlatform;
+        })
+        builder.addCase(filterByTagAsync.fulfilled, (state, action) =>{
+            // const index = state.findIndex((item) => item.genre === action.payload.genre)
+            // debugger
+            // state[index].genre = action.payload.genre;
+            return action.payload.gameByGenre;
         })
     }
 })

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, TextField} from "@mui/material";
+import {Button, TextField, Typography} from "@mui/material";
 import {useDispatch} from "react-redux";
 import {ftpGamesListAsync} from "../redux/Slice";
 import GamesList from "../components/GamesList";
@@ -20,8 +20,7 @@ const MainPage = () => {
 
     return (
         <div>
-            {/*<TextField onChange={handleTextfieldinput} value={title}/>*/}
-            {/*<Button variant="contained" color="primary">Send</Button>*/}
+            <Typography variant="h1">Free to play games list</Typography>
             <GamesList/>
         </div>
     );

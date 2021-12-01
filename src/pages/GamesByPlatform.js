@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {IconButton, Menu, MenuItem} from "@mui/material";
+import {IconButton, Menu, MenuItem, Typography} from "@mui/material";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import {gamesByPlatformAsync} from "../redux/Slice";
 import GamesList from "../components/GamesList";
@@ -8,7 +8,7 @@ import GamesList from "../components/GamesList";
 const GamesByPlatform = () => {
 
     const [anchorEl, setAnchorEl] = useState(false);
-    const [platform, setPlatform] = useState('Select platform');
+    const [platform, setPlatform] = useState('all');
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -18,26 +18,19 @@ const GamesByPlatform = () => {
         setAnchorEl(null);
     };
 
+    const dispatch = useDispatch();
 
     const handlePlatformClick = (e) =>{
         const {myValue} = e.currentTarget.dataset;
         setPlatform(myValue);
-        
+
         dispatch(gamesByPlatformAsync({platform: myValue}));
 
     }
 
-
-    const dispatch = useDispatch();
-
-
-
-    // useEffect(() =>{
-    //     dispatch(gamesByPlatformAsync())
-    // }, [])
-
     return (
         <div>
+            <Typography variant="h1">Games by platform list</Typography>
             <IconButton onClick={handleMenu}>Select platform<KeyboardArrowDownIcon/></IconButton>
             <Menu keepMounted anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
                 <MenuItem data-my-value="pc" onClick={handlePlatformClick}>PC</MenuItem>

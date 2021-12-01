@@ -6,7 +6,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Header from "./components/Header";
 import MainPage from "./pages/MainPage";
 import GamesByPlatform from "./pages/GamesByPlatform";
-import SortGames from "./pages/SortGames";
+import SortGamesByGenre from "./pages/SortGamesByGenre";
 
 const App = () => {
 
@@ -20,7 +20,7 @@ const App = () => {
                     <Switch>
                         <Route exact path="/" component={MainPage} />
                         <Route exact path="/gamesbyplatform" component={GamesByPlatform} />
-                        <Route exact path="/sortgames" component={SortGames} />
+                        <Route exact path="/sortgamesbygenre" component={SortGamesByGenre} />
                         <Route path="*" component={MainPage} />
                     </Switch>
                 </Container>

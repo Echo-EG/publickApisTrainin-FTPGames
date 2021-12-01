@@ -20,7 +20,7 @@ const Header = () => {
 
                     <Link to="/">Main page</Link>
                     <Link to="/gamesbyplatform">Games by platform</Link>
-                    <Link to="/sortgames">Sort games</Link>
+                    <Link to="/sortgamesbygenre">Sort games by genre</Link>
 
                 </Toolbar>
             </Container>

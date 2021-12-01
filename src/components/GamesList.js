@@ -26,7 +26,7 @@ const GamesList = () => {
                              sm={6}
                              xs={12}
                              key={listFromApi.id}>
-                    <Card variant="outlined" style={{background: "rgba(132,130,0,0.26)"}} className={classes.card} sx={{m:1}}>
+                    <Card variant="outlined" style={{background: "darkgray"}} className={classes.card} sx={{m:1}}>
                         <CardHeader title={listFromApi.title} subheader={listFromApi.genre}>
                             <Typography variant="h3">{listFromApi.platform}</Typography>
                         </CardHeader>

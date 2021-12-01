@@ -3,9 +3,19 @@ import {Button, TextField, Typography} from "@mui/material";
 import {useDispatch} from "react-redux";
 import {ftpGamesListAsync} from "../redux/Slice";
 import GamesList from "../components/GamesList";
+import {makeStyles} from "@mui/styles";
+
+const useStyles = makeStyles({
+    background: {
+        background: "#3f51b5"
+    }
+})
+
+
 
 const MainPage = () => {
 
+    const classes = useStyles();
     const dispatch = useDispatch();
 
     // const[title, setTitle] = useState('');
@@ -19,7 +29,7 @@ const MainPage = () => {
     }, [])
 
     return (
-        <div>
+        <div className={classes.background}>
             <Typography variant="h1">Free to play games list</Typography>
             <GamesList/>
         </div>

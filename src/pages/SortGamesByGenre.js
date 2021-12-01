@@ -13,9 +13,21 @@ import {
 import {useDispatch} from "react-redux";
 import {filterByTagAsync} from "../redux/Slice";
 import GamesList from "../components/GamesList";
+import {makeStyles} from "@mui/styles";
+
+
+const useStyles = makeStyles({
+    background: {
+        background: "#3f51b5"
+    }
+})
+
+
+
 
 const SortGamesByGenre = () => {
 
+    const classes = useStyles();
     const dispatch = useDispatch();
 
     const [checked, setChecked] = useState(false);
@@ -48,7 +60,7 @@ const SortGamesByGenre = () => {
     return (
 
 
-        <div>
+        <div className={classes.background} >
             <Typography variant="h1">Games by genre list</Typography>
             <Grid container>
                 {genreList.map((newGenre, key) => {
@@ -59,7 +71,7 @@ const SortGamesByGenre = () => {
                     </Grid>
                 })}
             </Grid>
-            <GamesList/>
+            <GamesList />
         </div>
 
         // <List subheader="Genre">

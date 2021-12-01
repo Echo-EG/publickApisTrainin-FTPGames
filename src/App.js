@@ -22,7 +22,7 @@ const App = () => {
 
     return (
         <CssBaseline  >
-            <div style={{background:"#3f51b5"}}>
+            <div className={classes.background} >
                 <Router>
                     <Header/>
                     <Container maxWidth="lg">

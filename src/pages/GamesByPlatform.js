@@ -4,9 +4,19 @@ import {IconButton, Menu, MenuItem, Typography} from "@mui/material";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import {gamesByPlatformAsync} from "../redux/Slice";
 import GamesList from "../components/GamesList";
+import {makeStyles} from "@mui/styles";
+
+const useStyles = makeStyles({
+    background: {
+        background: "#3f51b5"
+    }
+})
+
+
 
 const GamesByPlatform = () => {
 
+    const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(false);
     const [platform, setPlatform] = useState('all');
 
@@ -29,7 +39,7 @@ const GamesByPlatform = () => {
     }
 
     return (
-        <div>
+        <div className={classes.background}>
             <Typography variant="h1">Games by platform list</Typography>
             <IconButton onClick={handleMenu}>Select platform<KeyboardArrowDownIcon/></IconButton>
             <Menu keepMounted anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>

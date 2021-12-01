@@ -29,17 +29,21 @@ const SortGamesByGenre = () => {
     ]
 
 
-    const handleChange = (e) =>{
-        setChecked(!checked)
-        if(checked !== true){
-            dispatch(filterByTagAsync({genre: e.target.value}))
-            console.log("should work")
-        }
-        else{
-            console.log("didnt work")
-        }
-    }
+    // const handleChange = (e) =>{
+    //     setChecked(!checked)
+    //     if(checked !== true){
+    //         dispatch(filterByTagAsync({genre: e.target.value}))
+    //         console.log("should work")
+    //     }
+    //     else{
+    //         console.log("didnt work")
+    //     }
+    // }
 
+
+    const handleChange = (e) =>{
+        dispatch(filterByTagAsync({genre: e.target.value}))
+    }
 
     return (
 
@@ -47,11 +51,11 @@ const SortGamesByGenre = () => {
         <div>
             <Typography variant="h1">Games by genre list</Typography>
             <Grid container>
-                <Typography>Genre</Typography>
                 {genreList.map((newGenre, key) => {
                     return <Grid item sx={{m: 1}} key={newGenre.id} id={newGenre.id} >
-                        <Checkbox onChange={handleChange} value={newGenre.genre} />
+                        {/*<Checkbox onChange={handleChange} value={newGenre.genre} />*/}
                         <Typography >{newGenre.genre}</Typography>
+                        <input type="radio" onClick={handleChange} value={newGenre.genre} name="genre"/>
                     </Grid>
                 })}
             </Grid>
